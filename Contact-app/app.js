@@ -1,7 +1,35 @@
+const yargs = require("yargs");
+const contacts = require("./contacts");
 
+console.log(yargs.argv)
 
+yargs.command({
+    command: 'add',
+    describe: 'menambahkan contact baru',
+    builder: {
+        nama: {
+            discribe: "nama",
+            demanOpion: true,
+            type: 'string'
+        },
+        email: {
+            describe: 'Email',
+            demanOpion: false,
+            type: 'string'
+        },
+        noHP: {
+            describe: 'Nomor Handphone',
+            demanOpion: true,
+            type: 'string'
+        },
+    },
+    handler(argv){
+        contacts.simpanContact(argv.nama, argv.email, argv.noHP)
 
+    }
+})
 
+yargs.parse()
 
 
 
