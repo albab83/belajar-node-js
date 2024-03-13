@@ -1,6 +1,7 @@
 const { promises } = require('dns');
 const fs = require('fs');
 const chalk = require('chalk');
+const validator = require('validator')
 
 
 //membuat folder data jika foldernya belum ada
@@ -16,8 +17,8 @@ if(!fs.existsSync(dataPath)) {
 }
 
 
-const simpanContact = (nama, noHp, email) => {
-    const contact = {nama, noHp, email};
+const simpanContact = (nama, email, noHP) => {
+    const contact = {nama, email, noHP};
     const file = fs.readFileSync('data/contacts.json', 'utf-8');
     const contacts = JSON.parse(file);
 
@@ -29,12 +30,24 @@ const simpanContact = (nama, noHp, email) => {
     }
 
     // cek email
-    
+    if(email) {
+        if(!validator.isEmail(email)) {
+            console.log(chalk.red.inverse.bold('email tidak valid!'))
+            return false
+        }
+    }
+
+    // cek no hp
+    if(!validator.isMobilePhone(noHP, 'id-ID')) {
+        console.log(chalk.red.inverse.bold('No Hp tidak valid'))
+        return false
+    }
+
 
     contacts.push(contact);
 
     fs.writeFileSync('data/contacts.json', JSON.stringify(contacts));
-    console.log(`terimakasih ${nama} sudah menginputkan data`);
+    console.log(chalk.green.inverse.bold('terima kasih sudahmemasukan data'));
 }
 
 module.exports = { simpanContact }

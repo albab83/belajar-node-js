@@ -1,7 +1,7 @@
 const yargs = require("yargs");
 const contacts = require("./contacts");
 
-console.log(yargs.argv)
+
 
 yargs.command({
     command: 'add',
