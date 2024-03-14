@@ -2,7 +2,6 @@ const yargs = require("yargs");
 const contacts = require("./contacts");
 
 
-
 yargs.command({
     command: 'add',
     describe: 'menambahkan contact baru',
@@ -25,7 +24,6 @@ yargs.command({
     },
     handler(argv){
         contacts.simpanContact(argv.nama, argv.email, argv.noHP)
-
     }
 })
 
