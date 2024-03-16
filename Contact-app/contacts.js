@@ -20,7 +20,7 @@ if(!fs.existsSync(dataPath)) {
 const simpanContact = (nama, email, noHP) => {
     const contact = {nama, email, noHP};
     const file = fs.readFileSync('data/contacts.json', 'utf-8');
-    const contacts = JSON.parse(file, null,4);
+    const contacts = JSON.parse(file, null,7);
 
     //cek apakah namanya duplikat
     const duplikat = contacts.find((contact) => contact.nama === nama);
